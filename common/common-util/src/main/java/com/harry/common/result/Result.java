@@ -37,4 +37,5 @@ public class Result<T> {
     public static <T> Result<T> fail() {
         return build(null, ResultCodeEnum.FAIL);
     }
+
 }

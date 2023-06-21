@@ -12,10 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -60,6 +57,63 @@ public class SysRoleController {
 
         IPage<SysRole> pageModel = sysRoleService.page(pageParam, wrapper);
         return Result.success(pageModel);
+    }
+
+    //add roles
+    @ApiOperation("Add roles")
+    @PostMapping("save")
+    public Result save(@RequestBody SysRole role) {//transmit data by json
+        //use method in service
+        boolean isSuccess = sysRoleService.save(role);
+        if (isSuccess) {
+            return Result.success();
+        } else {
+            return Result.fail();
+        }
+    }
+
+    //search role by id
+    @ApiOperation("Search by id")
+    @GetMapping("get/{id}")
+    public Result get(@PathVariable Long id) {
+        SysRole role = sysRoleService.getById(id);
+        return Result.success(role);
+    }
+
+    //update role
+    @ApiOperation("Update role")
+    @PutMapping("update")
+    public Result update(@RequestBody SysRole role) {
+        boolean isSuccess = sysRoleService.updateById(role);
+        if (isSuccess) {
+            return Result.success();
+        } else {
+            return Result.fail();
+        }
+    }
+
+    //delete role by id
+    @ApiOperation("Delete role by id")
+    @DeleteMapping("remove/{id}")
+    public Result remove(@PathVariable Long id) {
+        boolean isSuccess = sysRoleService.removeById(id);
+        if (isSuccess) {
+            return Result.success();
+        } else {
+            return Result.fail();
+        }
+    }
+
+    //delete in batches
+    @ApiOperation("Delete in batches")
+    @DeleteMapping("batchRemove")
+    public Result batchRemove(@RequestBody List<Long> idList) {//jason array-> java list
+        boolean isSuccess = sysRoleService.removeByIds(idList);
+        if (isSuccess) {
+            return Result.success();
+        } else {
+            return Result.fail();
+        }
     }
 
 
