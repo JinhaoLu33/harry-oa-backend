@@ -51,7 +51,6 @@ public class SysRoleController {
         LambdaQueryWrapper<SysRole> wrapper = new LambdaQueryWrapper<>();
         String roleName = sysRoleQueryVo.getRoleName();
         if (!StringUtils.isEmpty(roleName)) {
-
             wrapper.like(SysRole::getRoleName, roleName);
         }
 
