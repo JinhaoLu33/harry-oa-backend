@@ -40,18 +40,18 @@ public class SysRoleController {
     }
 
     //Conditional paginated queries
-    @ApiOperation("Conditional paginated queries")
+    @ApiOperation("Conditional Paginated Query")
     @GetMapping("{page}/{limit}")
     public Result pageQueryRole(@PathVariable Long page,
                                 @PathVariable Long limit,
                                 SysRoleQueryVo sysRoleQueryVo) {
-        //use method in service
-        //1.page parameters
+
         Page<SysRole> pageParam = new Page<>(page, limit);
-        //2. encapsulate conditions
+
         LambdaQueryWrapper<SysRole> wrapper = new LambdaQueryWrapper<>();
         String roleName = sysRoleQueryVo.getRoleName();
         if (!StringUtils.isEmpty(roleName)) {
+
             wrapper.like(SysRole::getRoleName, roleName);
         }
 
@@ -73,7 +73,7 @@ public class SysRoleController {
     }
 
     //search role by id
-    @ApiOperation("Search by id")
+    @ApiOperation("Search role by id")
     @GetMapping("get/{id}")
     public Result get(@PathVariable Long id) {
         SysRole role = sysRoleService.getById(id);

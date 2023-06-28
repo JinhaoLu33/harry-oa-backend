@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-//@ComponentScan("com.harry")
-@MapperScan("com.harry.auth.mapper")
+@ComponentScan("com.harry")
+//@MapperScan("com.harry.auth.mapper")
 public class ServiceAuthApplication {
 
     public static void main(String[] args) {

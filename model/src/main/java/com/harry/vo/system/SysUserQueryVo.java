@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 用户查询实体
+ * User entity
  * </p>
  */
 @Data
