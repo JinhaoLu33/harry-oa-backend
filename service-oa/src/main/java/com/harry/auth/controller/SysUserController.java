@@ -42,13 +42,13 @@ public class SysUserController {
         String createTimeBegin = sysUserQueryVo.getCreateTimeBegin();
         String createTimeEnd = sysUserQueryVo.getCreateTimeEnd();
 
-        if (StringUtils.isEmpty(username)) {
+        if (!StringUtils.isEmpty(username)) {
             wrapper.like(SysUser::getName, username);
         }
-        if (StringUtils.isEmpty(createTimeBegin)) {
+        if (!StringUtils.isEmpty(createTimeBegin)) {
             wrapper.ge(SysUser::getCreateTime, createTimeBegin);
         }
-        if (StringUtils.isEmpty(createTimeEnd)) {
+        if (!StringUtils.isEmpty(createTimeEnd)) {
             wrapper.le(SysUser::getCreateTime, createTimeEnd);
         }
         //use MP methods for pagination

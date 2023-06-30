@@ -7,6 +7,7 @@ import com.harry.auth.mapper.SysRoleMapper;
 import com.harry.auth.service.SysRoleService;
 import com.harry.common.result.Result;
 import com.harry.model.system.SysRole;
+import com.harry.vo.system.AssignRoleVo;
 import com.harry.vo.system.SysRoleQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "role management api")
 @RestController//controller, responseBody
@@ -24,12 +26,22 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
-    //search all roles
-//    @GetMapping("/findAll")
-//    public List<SysRole> findAll(){
-//        List<SysRole> list = sysRoleService.list();
-//        return list;
-//    }
+    //search all roles and current user role
+    @ApiOperation("get roles by id")
+    @GetMapping("/toAssign/{userId}")
+    public Result toAssign(@PathVariable Long userId){
+        Map<String,Object> map = sysRoleService.findRoleDataByUserId(userId);
+        return Result.success(map);
+    }
+    //assign user a role
+    @ApiOperation("assign user roles")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssignRoleVo assignRoleVo){
+        sysRoleService.doAssign(assignRoleVo);
+        return Result.success();
+    }
+
+
 
     //search all roles
     @ApiOperation("find all roles")
