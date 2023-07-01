@@ -83,5 +83,12 @@ public class SysUserController {
         service.removeById(id);
         return Result.success();
     }
+
+    @ApiOperation(value = "Update user status by id")
+    @GetMapping("updateStatus/{id}/{status}")
+    public Result updateStatus(@PathVariable Long id,@PathVariable Integer status) {
+        service.updateStatus(id,status);
+        return Result.success();
+    }
 }
 

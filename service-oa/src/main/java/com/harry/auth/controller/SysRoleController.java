@@ -41,8 +41,6 @@ public class SysRoleController {
         return Result.success();
     }
 
-
-
     //search all roles
     @ApiOperation("find all roles")
     @GetMapping("/findAll")

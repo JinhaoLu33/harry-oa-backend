@@ -51,7 +51,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         //put the data into a map
         Map<String,Object> roleMap = new HashMap<>();
         roleMap.put("assignRoleList",assignRoleList);
-        roleMap.put("allRoleList",allRoleList);
+        roleMap.put("allRolesList",allRoleList);
         return roleMap;
     }
 
@@ -71,7 +71,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
                 continue;
             }
             SysUserRole sysUserRole = new SysUserRole();
-            sysUserRole.setUserId(roleId);
+            sysUserRole.setUserId(assignRoleVo.getUserId());
+            sysUserRole.setRoleId(roleId);
             sysUserRoleService.save(sysUserRole);
         }
 
