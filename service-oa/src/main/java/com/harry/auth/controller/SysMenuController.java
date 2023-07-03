@@ -4,6 +4,7 @@ package com.harry.auth.controller;
 import com.harry.auth.service.SysMenuService;
 import com.harry.common.result.Result;
 import com.harry.model.system.SysMenu;
+import com.harry.vo.system.AssignMenuVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,20 @@ public class SysMenuController {
     @DeleteMapping("remove/{id}")
     public Result remove(@PathVariable Long id) {
         sysMenuService.removeMenuById(id);
+        return Result.success();
+    }
+
+    @ApiOperation("find all menus and role assigned menus")
+    @GetMapping("toAssign/{roleId}")
+    public Result toAssign(@PathVariable Long roleId){
+       List<SysMenu> list = sysMenuService.findMenuByRoleId(roleId);
+       return Result.success(list);
+    }
+
+    @ApiOperation("assign role menus")
+    @PostMapping("doAssign")
+    public Result doAssign(@RequestBody AssignMenuVo assignMenuVo){
+        sysMenuService.doAssign(assignMenuVo);
         return Result.success();
     }
 }
