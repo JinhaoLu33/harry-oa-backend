@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.harry.auth.service.SysUserService;
 import com.harry.common.result.Result;
+import com.harry.common.utils.MD5;
 import com.harry.model.system.SysUser;
 import com.harry.vo.system.SysUserQueryVo;
 import io.swagger.annotations.Api;
@@ -66,6 +67,9 @@ public class SysUserController {
     @ApiOperation(value = "Save user")
     @PostMapping("save")
     public Result save(@RequestBody SysUser user) {
+        //MD5 encode password
+        String passwordMD5 = MD5.encrypt(user.getPassword());
+        user.setPassword(passwordMD5);
         service.save(user);
         return Result.success();
     }
@@ -86,8 +90,8 @@ public class SysUserController {
 
     @ApiOperation(value = "Update user status by id")
     @GetMapping("updateStatus/{id}/{status}")
-    public Result updateStatus(@PathVariable Long id,@PathVariable Integer status) {
-        service.updateStatus(id,status);
+    public Result updateStatus(@PathVariable Long id, @PathVariable Integer status) {
+        service.updateStatus(id, status);
         return Result.success();
     }
 }
