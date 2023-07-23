@@ -50,7 +50,7 @@ public class IndexController {
         //check password
         String passwordDB = sysUser.getPassword();
         String passwordInput = MD5.encrypt(loginVo.getPassword());
-        if (!passwordInput.equals(passwordDB)) {
+        if(!passwordDB.equals(passwordInput)) {
             throw new UserException(201, "password is incorrect");
         }
         //check user status

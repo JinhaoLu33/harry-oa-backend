@@ -12,6 +12,7 @@ import com.harry.vo.system.SysRoleQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,7 @@ public class SysRoleController {
     }
 
     //Conditional paginated queries
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("Conditional Paginated Query")
     @GetMapping("{page}/{limit}")
     public Result pageQueryRole(@PathVariable Long page,
@@ -69,6 +71,7 @@ public class SysRoleController {
     }
 
     //add roles
+    @PreAuthorize("hasAuthority('bnt.sysRole.add')")
     @ApiOperation("Add roles")
     @PostMapping("save")
     public Result save(@RequestBody SysRole role) {//transmit data by json
@@ -82,6 +85,7 @@ public class SysRoleController {
     }
 
     //search role by id
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("Search role by id")
     @GetMapping("get/{id}")
     public Result get(@PathVariable Long id) {
@@ -90,6 +94,7 @@ public class SysRoleController {
     }
 
     //update role
+    @PreAuthorize("hasAuthority('bnt.sysRole.update')")
     @ApiOperation("Update role")
     @PutMapping("update")
     public Result update(@RequestBody SysRole role) {
@@ -102,6 +107,7 @@ public class SysRoleController {
     }
 
     //delete role by id
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("Delete role by id")
     @DeleteMapping("remove/{id}")
     public Result remove(@PathVariable Long id) {
@@ -114,6 +120,7 @@ public class SysRoleController {
     }
 
     //delete in batches
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("Delete in batches")
     @DeleteMapping("batchRemove")
     public Result batchRemove(@RequestBody List<Long> idList) {//jason array-> java list
